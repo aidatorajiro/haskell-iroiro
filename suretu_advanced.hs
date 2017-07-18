@@ -18,7 +18,7 @@ arr a1 a2 p q n =
       square x = mul x x
 
       fastPow :: (Rational, Rational) -> Integer -> (Rational, Rational)
-      fastPow base 0 = (1, 0)
+      fastPow _    0 = (1, 0)
       fastPow base 1 = base
       fastPow base pow | even pow = square (fastPow base (div pow 2))
                         | odd  pow = mul (square (fastPow base (div (pow-1) 2))) base
