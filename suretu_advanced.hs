@@ -1,5 +1,6 @@
 import Data.Ratio
 import Control.Applicative
+import System.Environment
 
 arr :: Rational -> Rational -> Rational -> Rational -> Integer -> (Rational, Rational)
 arr a1 a2 p q n =
@@ -47,18 +48,6 @@ arr a1 a2 p q n =
 
 main :: IO ()
 main = do
-  putStrLn "Enter a1 value"
-  a1 <- fmap (fromInteger . read) getLine
-  putStrLn "Enter a2 value"
-  a2 <- fmap (fromInteger . read) getLine
-  putStrLn "Enter p value"
-  p <- fmap (fromInteger . read) getLine
-  putStrLn "Enter q value"
-  q <- fmap (fromInteger . read) getLine
-
-  many $ do
-    putStrLn "Enter n value"
-    n <- fmap (fromInteger . read) getLine
-    print $ numerator $ fst $ arr a1 a2 p q n
-
-  return ()
+  [a1, a2, p, q, n] <- getArgs
+  print $ numerator $ fst $ arr (s a1) (s a2) (s p) (s q) (read n)
+  where s = fromInteger . read
