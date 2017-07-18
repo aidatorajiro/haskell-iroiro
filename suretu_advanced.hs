@@ -1,4 +1,5 @@
 import Data.Ratio
+import Control.Applicative
 
 arr :: Rational -> Rational -> Rational -> Rational -> Integer -> (Rational, Rational)
 arr a1 a2 p q n =
@@ -55,9 +56,9 @@ main = do
   putStrLn "Enter q value"
   q <- fmap (fromInteger . read) getLine
 
-  let loop = do
-        putStrLn "Enter n value"
-        n <- fmap (fromInteger . read) getLine
-        print $ numerator $ fst $ arr a1 a2 p q n
-        loop
-   in loop
+  many $ do
+    putStrLn "Enter n value"
+    n <- fmap (fromInteger . read) getLine
+    print $ numerator $ fst $ arr a1 a2 p q n
+
+  return ()
